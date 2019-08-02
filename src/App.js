@@ -41,6 +41,7 @@ class App extends React.Component{
 	}
 
 	deleteNotes = (noteID) => {
+		
 		const newNotesArr = this.state.notes.filter(note => note.id !== noteID)
 		
 		console.log('newNotesArr:', newNotesArr)

@@ -6,7 +6,9 @@ import { withRouter } from 'react-router-dom'
 const noteDiv = (props) => {
 	console.log(props)
 	
-	const deleteNoteRequest = (noteID, callback) => {
+	const deleteNoteRequest = (e, noteID, callback) => {
+		e.preventDefault();
+		
 		const deleteURL = `http://localhost:9090/notes/${noteID}`
 		
 		const options = {
@@ -43,10 +45,9 @@ const noteDiv = (props) => {
 						<div className="noteful-notediv" id = {folderID}>
 							<h1>{title}</h1>
 							<h5>{modified}</h5>
-							<button onClick={()=> {
-									deleteNoteRequest(props.id, value.deleteNotes)
-									props.history.replace('/')
-
+							<button onClick={(e)=> {
+									deleteNoteRequest(e, props.id, value.deleteNotes)
+									
 								}}>- Delete</button>
 						</div>
 					

@@ -20,13 +20,13 @@ const sidebar = (props) => {
 					console.log('noteID:', noteID)
 					
 					let targetNote = notesArr.find(note => {
-						console.log(note)
 						return note.id === noteID
 					})	
 					
 					console.log('targetNote:', targetNote)
 						
-					let targetFolderID = targetNote.folderId		
+					let targetFolderID = targetNote.folderId	
+					
 					foldersArr = foldersArr.filter(folder => folder.id === targetFolderID)
 				}
 
