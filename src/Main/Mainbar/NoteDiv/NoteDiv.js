@@ -28,6 +28,8 @@ const noteDiv = (props) => {
 		})
 			.then(responseJson => {
 				callback(noteID)
+			
+				props.history.replace('/')
 					})
 	}
 
