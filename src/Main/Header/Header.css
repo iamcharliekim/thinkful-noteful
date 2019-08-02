@@ -1,0 +1,19 @@
+.noteful-header {
+	width: 100%;
+	border-bottom: 2px solid black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.noteful-header h1 {
+	margin: 5px 0
+}
+
+button {
+	padding: 10px;
+}
+
+.noteful-header-link {
+	text-decoration: none;
+}

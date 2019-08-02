@@ -1,0 +1,21 @@
+.noteful-sidebar {
+	list-style: none;
+	width: 25%;
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	color: black;
+}
+
+.noteful-sidebar button {
+	width: 100%;
+	font-size: 15px;
+	padding: 10px;
+	cursor: pointer
+}
+
+.active {
+	color: purple;
+	text-decoration: underline;
+	
+}

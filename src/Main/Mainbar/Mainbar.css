@@ -1,0 +1,13 @@
+.noteful-mainbar {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+}
+
+.noteful-link {
+	width: 100%;
+	text-decoration: none;
+}
