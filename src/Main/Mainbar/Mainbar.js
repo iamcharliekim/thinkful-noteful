@@ -3,6 +3,7 @@ import NoteDiv from './NoteDiv/NoteDiv'
 import { Link } from 'react-router-dom'
 import './Mainbar.css'
 import Context from '../../Context'
+import ErrorBoundary from '../../ErrorBoundary'
 
 const mainbar = (props) => {
 	return  (
@@ -18,8 +19,9 @@ const mainbar = (props) => {
 						notesArr = value.notes
 					}
 					
+					
 					notes = notesArr.map(note => {
-						return <Link to={"/note/" + note.id} key= {note.id} className="noteful-link"><NoteDiv title = {note.name} modified = {note.modified} folderID={note.folderId} id={note.id} /></Link>
+						return <Link to={"/note/" + note.id} key= {note.id} className="noteful-link"><ErrorBoundary><NoteDiv title = {note.name} modified = {note.modified} folderID={note.folderId} id={note.id} /></ErrorBoundary></Link>
 					})
 	
 					return (

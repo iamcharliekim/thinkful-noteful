@@ -1,5 +1,6 @@
 import React from 'react'
 import './Sidefolder.css'
+import PropTypes from 'prop-types'
 
 
 const sidefolder = (props) => {
@@ -12,6 +13,11 @@ const sidefolder = (props) => {
 		</li>
 	
 	)
+}
+
+sidefolder.propTypes = {
+	name: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired
 }
 
 export default sidefolder

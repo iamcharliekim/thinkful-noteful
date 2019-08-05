@@ -3,17 +3,16 @@ import './Note.css'
 import Context from '../Context'
 
 const note = (props) => {
-	let targetNote;
-
 	return  (
-		
 		<Context.Consumer>
 		
 		{
 			(value)=> {
-				console.log(value)
-					if (props.match.params.noteID){
-						targetNote = value.notes.filter(note => note.id === props.match.params.noteID)[0]					}
+				let targetNote;
+
+				if (props.match.params.noteID){
+					targetNote = value.notes.find(note => note.id === props.match.params.noteID)				
+				}
 				
 				return (
 					<div className="noteful-note">

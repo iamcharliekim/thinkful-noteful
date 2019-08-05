@@ -2,10 +2,10 @@ import React from 'react'
 import './NoteDiv.css'
 import Context from '../../../Context'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 
 const noteDiv = (props) => {
-	console.log(props)
-	
 	const deleteNoteRequest = (e, noteID, callback) => {
 		e.preventDefault();
 		
@@ -38,7 +38,6 @@ const noteDiv = (props) => {
 		<Context.Consumer>
 			{
 				(value)=> {
-					console.log(value)
 					let title = props.title
 					let modified = props.modified
 					let folderID = props.folderID
@@ -59,6 +58,13 @@ const noteDiv = (props) => {
 			
 		</Context.Consumer>
 	)
+}
+
+noteDiv.propTypes = {
+	title: PropTypes.string.isRequired,
+	modified: PropTypes.string.isRequired,
+	folderID: PropTypes.string.isRequired,
+	
 }
 
 export default withRouter(noteDiv)

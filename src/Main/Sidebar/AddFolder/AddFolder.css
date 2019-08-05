@@ -1,0 +1,29 @@
+.addFolder {
+	width: 50%;
+	display: flex;
+	border: 1px solid gray;
+	padding: 20px;
+	justify-content: center;
+	align-items: center;
+	margin: 10px auto;
+	background-color: lightgray;
+	
+}
+
+.addFolder label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.addFolder input {
+	margin-left: 5px;
+	border: 1px solid gray;
+	padding: 5px;
+}
+
+.addFolder button {
+	margin-left: 5px;
+	padding: 10px;
+	border: 1px solid gray
+}
