@@ -1,19 +1,45 @@
 .noteful-header {
+	box-sizing: border-box;
 	width: 100%;
-	border-bottom: 2px solid black;
+	min-width: 485px;
+	border-bottom: 1px solid black;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	background-color: #E9EBF8;
+	padding: 5px 10px;
 }
 
 .noteful-header h1 {
-	margin: 5px 0
-}
-
-button {
-	padding: 10px;
+	margin: 5px 0;
 }
 
 .noteful-header-link {
+	text-decoration: none;
+
+}
+
+.noteful-inner-header{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 800px;
+}
+
+
+.add-note {
+	padding: 10px;
+	color: #840032;
+	background-color: white;
+	border: 1px solid gray;
+	text-decoration: none;
+}
+
+a.add-note.active {
+	background-color:#7F7CAF;
+	border: 1px solid #22223B;
+	color: white;
+	font-weight: 500;
 	text-decoration: none;
 }

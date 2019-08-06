@@ -8,8 +8,8 @@ const sidefolder = (props) => {
 	let id = props.id
 	
 	return (
-		<li className="noteful-sidefolder" id={id}>
-			<h2>{name}</h2>
+		<li id={id}>
+			{name}
 		</li>
 	
 	)

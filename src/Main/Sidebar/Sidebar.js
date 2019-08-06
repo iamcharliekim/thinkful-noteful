@@ -27,14 +27,14 @@ const sidebar = (props) => {
 				}
 
 				const folders = foldersArr.map(folder => {
-					return <NavLink to={"/folder/" + folder.id} key = {folder.id} className="noteful-sidebar"><ErrorBoundary><Sidefolder name = {folder.name} id = {folder.id} /></ErrorBoundary></NavLink>
+					return <NavLink to={"/folder/" + folder.id} key = {folder.id} className="noteful-sidefolder"><ErrorBoundary><Sidefolder name = {folder.name} id = {folder.id} /></ErrorBoundary></NavLink>
 				})
 
 				return (
 					<ul className="noteful-sidebar">
 						{folders}
 
-						{noteID ? <NavLink to="/">Go back</NavLink> : <NavLink to="/addfolder"><button> + Add Folder</button></NavLink>}
+						{noteID ? <NavLink to="/" className="noteful-sidefolder btn">Go back</NavLink> : <NavLink to="/addfolder" className="noteful-sidefolder btn"> + Add Folder</NavLink>}
 
 					</ul>
 				)	

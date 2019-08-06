@@ -1,20 +1,50 @@
 .AddNote {
-	width: 60%;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	margin: 10px auto
+	justify-content: center;
+	align-items: center;
+	margin: 0px auto;
+	box-sizing: border-box
 	
 }
 
 .AddNote label {
+	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	margin: 10px 0
+	margin: 10px 0;
+	font-size: 20px;
 }
 
-.AddNote input, .AddNote textarea {
-	margin-left: 5px
+.AddNote input, .AddNote textarea, .AddNote select {
+	width: 100%;
+	margin-top: 5px;
+	font-size: 18px;
+}
+
+.AddNote button {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+		background-color:#7F7CAF;
+	border: 1px solid #22223B;
+	color: white;
+	font-weight: 500;
+	margin-top: 10px
+}
+
+
+.AddNote button:hover {
+		background-color:#7F7CAF;
+	border: 1px solid #22223B;
+	color: white
+}
+
+.AddNote button:disabled {
+	background-color: white;
+	color: lightgray;
+	border: 1px solid gray
 }

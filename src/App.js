@@ -9,8 +9,7 @@ class App extends React.Component{
 	state = {
 		folders: [],
 		notes: [],
-		error: false,
-		errorMsg: '',
+		errorMsg: null,
 	}
 
 	componentDidMount() {		
@@ -19,25 +18,21 @@ class App extends React.Component{
 	}
 
 	getFolders = () => {
-		// throw error on purpose by spelling 'folders' wrong
-		const foldersURL = `http://localhost:9090/foslders`
+		const foldersURL = `http://localhost:9090/folders`
 		
 		fetch(foldersURL)
 			.then(response => {
 				if (response.ok){
 					return response.json()
 				} else {
-					throw new Error('Something went wrong')
+					throw new Error('Something went wrong!')
 				}
 		})
 			.then(responseJson => {
 				this.setState({ folders: responseJson})
 		})
 			.catch(error => {
-				console.log(error)
-			
-				// if there is an error, set the error state to true with the errorMsg to handle in render()
-				this.setState({error: true, errorMsg: error})
+				this.setState({errorMsg: error.message})
 		})		
 	}
 	
@@ -49,16 +44,14 @@ class App extends React.Component{
 				if (response.ok){
 					return response.json()
 				} else {
-					throw new Error('Something went wrong')
+					throw new Error('Something went wrong!')
 				}
 		})
 			.then(responseJson => {
 				this.setState({ notes: responseJson})
 		})
 			.catch(error => {
-				console.log(error)
-			
-				//this.setState({ error: true, errorMsg: error})
+				this.setState({ errorMsg: error.message})
 		})		
 	}
 
@@ -68,8 +61,9 @@ class App extends React.Component{
 	}
 	
 	addFolder = (folder) => {
+		console.log(folder)
 		const foldersCopy = [...this.state.folders]
-		foldersCopy.push(JSON.parse(folder))
+		foldersCopy.push(folder)
 
 		this.setState({folders: foldersCopy})
 	}
@@ -80,8 +74,6 @@ class App extends React.Component{
 		
 		this.setState({notes: notesCopy})	
 	}
-
-
 	
 	render() {
 		const contextValue = {
@@ -92,16 +84,14 @@ class App extends React.Component{
 			addNote: this.addNote
 		}
 		
-		// conditionally render based on error
 		let route;
 		
-		if (this.state.error){
+		if (this.state.errorMsg){
 			route = <h1>{this.state.errorMsg}</h1>
 		} else {
 			route = <Route path="/"  component={Main}/>
 		}
 		
-
 		return (
 			<Context.Provider value={contextValue}>
 				<div className="App">

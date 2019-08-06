@@ -5,8 +5,14 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 
-const noteDiv = (props) => {
-	const deleteNoteRequest = (e, noteID, callback) => {
+class noteDiv extends React.Component{
+	state = {
+		errorMsg: null
+	}
+	
+	static contextType = Context
+
+	deleteNoteRequest = (e, noteID, callback) => {
 		e.preventDefault();
 		
 		const deleteURL = `http://localhost:9090/notes/${noteID}`
@@ -23,43 +29,42 @@ const noteDiv = (props) => {
 				if (response.ok){
 					return response.json()
 				} else {
-					throw new Error('oops something went wrong!')
+					throw new Error('Something went wrong! Could not delete!')
 				}
 		})
 			.then(responseJson => {
 				callback(noteID)
 			
-				props.history.replace('/')
-					})
+				this.props.history.replace('/')
+		})
+			.catch(error => {
+				this.setState({errorMsg: error.message})
+				
+		})
 	}
 
-	
-	return (
-		<Context.Consumer>
-			{
-				(value)=> {
-					let title = props.title
-					let modified = props.modified
-					let folderID = props.folderID
-					
-					return (
-						<div className="noteful-notediv" id = {folderID}>
-							<h1>{title}</h1>
-							<h5>{modified}</h5>
-							<button onClick={(e)=> {
-									deleteNoteRequest(e, props.id, value.deleteNotes)
-									
-								}}>- Delete</button>
-						</div>
-					
-					)
-				}
-			}
-			
-		</Context.Consumer>
-	)
-}
+	render() {
+		let title = this.props.title
+		let modified = this.props.modified
+		let folderID = this.props.folderID
+		
+		if (this.state.errorMsg){
+			return <h1>{this.state.errorMsg}</h1>
+		}
+		
+		return (
+			<div className="noteful-notediv" id = {folderID}>
+				<h1>{title}</h1>
+				<h5>{modified}</h5>
+				<button onClick={(e)=> {
+						this.deleteNoteRequest(e, this.props.id, this.context.deleteNotes)
 
+					}}>- Delete</button>
+			</div>
+			)
+	}
+}
+			
 noteDiv.propTypes = {
 	title: PropTypes.string.isRequired,
 	modified: PropTypes.string.isRequired,

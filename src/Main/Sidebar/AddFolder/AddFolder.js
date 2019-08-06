@@ -4,7 +4,8 @@ import Context from '../../../Context'
 
 class AddFolder extends React.Component {
 	state = {
-		folderName: ''
+		folderName: '',
+		errorMsg: null
 	}
 
 	newFolderChange = (e) => {
@@ -16,14 +17,15 @@ class AddFolder extends React.Component {
 		e.preventDefault();
 		
 		const foldersURL = `http://localhost:9090/folders`
+		const body = {
+			name: this.state.folderName
+		}
 		const options = {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({
-				name: this.state.folderName
-			})
+			body: JSON.stringify(body)
 		}
 		
 		fetch(foldersURL, options)
@@ -35,19 +37,20 @@ class AddFolder extends React.Component {
 				}
 		})
 			.then(responseJson => {
-				callback(options.body)
+				body.id = responseJson.id
+				callback(body)
+				
 				this.props.history.replace('/')
 			
 		})
 			.catch(error => {
-				console.log(error)
+				this.setState({errorMsg: error.message})
 		})
 
 	}	
 	
 	validateFolderName = () => {
 		let folderName = this.state.folderName.trim()
-		console.log(folderName.length===0)
 		
 		if (folderName.length === 0){
 			return 'Please enter a valid folder name'
@@ -58,12 +61,15 @@ class AddFolder extends React.Component {
 	render() {
 		return (
 		<Context.Consumer>
-			{(value)=>{					
+			{(value)=>{			
+					if (this.state.errorMsg){
+						return <h1>{this.state.errorMsg}</h1>
+					}
 					return (
 							<form onSubmit={(e)=> this.onSubmitHandler(e, value.addFolder)} className="addFolder">
-								<label htmlFor="folder-name">Folder Name:
+								<label htmlFor="folder-name">Folder Name:</label>
 									<input type="text" id="folder-name" onChange={this.newFolderChange} value={this.state.folderName}/>
-								</label>
+								
 								<button type="submit"
 										disabled={this.validateFolderName()}>Submit</button>
 							</form>

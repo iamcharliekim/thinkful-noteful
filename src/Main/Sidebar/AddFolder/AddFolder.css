@@ -1,29 +1,47 @@
 .addFolder {
 	width: 50%;
 	display: flex;
+	flex-direction: column;
 	border: 1px solid gray;
-	padding: 20px;
+	padding: 30px;
 	justify-content: center;
 	align-items: center;
-	margin: 10px auto;
-	background-color: lightgray;
+	margin: 5px auto;
+		background-color: #E9EBF8;
+
 	
 }
 
 .addFolder label {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	margin-bottom: 10px;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	
 }
 
 .addFolder input {
-	margin-left: 5px;
+	margin-bottom: 10px;
 	border: 1px solid gray;
 	padding: 5px;
+	width: 75%;
+	font-size: 18px;
 }
 
+
+
 .addFolder button {
-	margin-left: 5px;
+	width: 80%;
 	padding: 10px;
+	font-size: 18px;
+		background-color:#7F7CAF;
+	border: 1px solid #22223B;
+	color: white;
+	font-weight: 500
+}
+
+.addFolder button:disabled {
+	background-color: white;
+	color: lightgray;
 	border: 1px solid gray
 }

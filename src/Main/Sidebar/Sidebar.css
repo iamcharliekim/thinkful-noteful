@@ -1,10 +1,16 @@
 .noteful-sidebar {
+	box-sizing: border-box;
 	list-style: none;
-	width: 25%;
+	width: 30%;
+	min-width: 125.55px;
 	padding: 0;
 	margin: 0;
 	text-decoration: none;
 	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .noteful-sidebar button {
@@ -16,6 +22,6 @@
 
 .active {
 	color: purple;
-	text-decoration: underline;
-	
+	text-decoration: underline;	
 }
+

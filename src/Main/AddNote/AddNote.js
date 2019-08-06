@@ -2,12 +2,14 @@ import React from 'react'
 import Context from '../../Context'
 import './AddNote.css'
 import FolderSelect from './FolderSelect/FolderSelect'
+import ErrorBoundary from '../../ErrorBoundary'
 
 class AddNote extends React.Component {
 	state = {
 		name: '',
 		folder: 'Important',
-		body: ''
+		body: '',
+		errorMsg: null,
 	}
 
 	nameHandler = (e) => {
@@ -62,6 +64,9 @@ class AddNote extends React.Component {
 			
 				this.props.history.replace('/')		
 		})
+			.catch(error => {
+				this.setState({errorMsg: error.message})	
+		})
 		
 		
 	}
@@ -77,7 +82,11 @@ class AddNote extends React.Component {
 	render() {
 		return (
 			<Context.Consumer>
-			{ (context)=> {					
+			{ (context)=> {
+					if (this.state.errorMsg){
+						return <h1>{this.state.errorMsg}</h1>
+					} 
+					
 					return (
 						<form className="AddNote" onSubmit={(e)=> this.onSubmitHandler(e, context.folders, context.addNote)}>
 							<label>Name: 
@@ -85,12 +94,13 @@ class AddNote extends React.Component {
 							</label>
 							
 							<label>Folder:
-								<FolderSelect folderHandler={this.folderHandler}/>
+								<ErrorBoundary><FolderSelect folderHandler={this.folderHandler}/></ErrorBoundary>
 							</label>
 							
 							<label>Body:
 								<textarea name="" id="body" cols="30" rows="10" onChange={this.bodyHandler} value={this.state.body}></textarea>
 							</label>
+							
 							
 							<button 
 								type="submit"

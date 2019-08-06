@@ -1,6 +1,19 @@
 .noteful-notediv {
-	width: 90%;
-	border: 2px solid black;
-	margin: 10px 0;
-	padding: 10px
+	border: 1px solid gray;
+	margin: 5px 0;
+	padding: 10px;
+	color: black;
+	background-color: #E9EBF8;
+}
+
+.noteful-notediv h1 {
+	color: #840032
+}
+
+.noteful-notediv h5 {
+	font-weight: 100
+}
+
+.noteful-notediv button {
+	cursor: pointer
 }

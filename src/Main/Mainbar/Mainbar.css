@@ -1,13 +1,16 @@
 .noteful-mainbar {
-	width: 70%;
+	width: 65%;
+	min-width: 272.02px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	
 }
 
 .noteful-link {
 	width: 100%;
 	text-decoration: none;
+	color: rgb(85, 26, 139)
+	
 }
