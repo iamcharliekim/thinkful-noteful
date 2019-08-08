@@ -10,6 +10,8 @@ const sidebar = (props) => {
 	return (
 		<Context.Consumer>
 			{ (value)=> {
+				
+				console.log(value)
 				let foldersArr = value.folders	
 				let notesArr = value.notes
 				let noteID
@@ -27,7 +29,18 @@ const sidebar = (props) => {
 				}
 
 				const folders = foldersArr.map(folder => {
-					return <NavLink to={"/folder/" + folder.id} key = {folder.id} className="noteful-sidefolder"><ErrorBoundary><Sidefolder name = {folder.name} id = {folder.id} /></ErrorBoundary></NavLink>
+					console.log(folder)
+					
+					return (
+						
+							<ErrorBoundary>
+								<li id={folder.id} className="noteful-sidefolder" key = {folder.id}>
+									<NavLink to={"/folder/" + folder.id} className="sidefolder-navlink">
+										{folder.name}
+									</NavLink>
+								</li>
+							</ErrorBoundary>
+						)
 				})
 
 				return (
