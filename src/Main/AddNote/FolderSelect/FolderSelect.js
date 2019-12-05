@@ -13,7 +13,7 @@ const folderSelect = (props) => {
 				})
 				
 				return (
-						<select className="folderSelect" onChange={props.folderHandler}>
+						<select className="folderSelect" onInput={props.folderHandler}>
 							{folderOptions}
 						</select>
 				)

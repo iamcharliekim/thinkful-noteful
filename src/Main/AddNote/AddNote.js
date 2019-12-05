@@ -3,13 +3,25 @@ import Context from '../../Context'
 import './AddNote.css'
 import FolderSelect from './FolderSelect/FolderSelect'
 import ErrorBoundary from '../../ErrorBoundary'
+import config from '../../config'
 
 class AddNote extends React.Component {
 	state = {
 		name: '',
-		folder: 'Important',
+		folder: '',
 		body: '',
 		errorMsg: null,
+	}
+
+	static contextType = Context
+
+	componentDidMount(){
+		if (this.context.folders.length >= 1 ){
+			this.setState({ folder: this.context.folders[0].name})
+		}  else {
+			this.setState({ errorMsg: 'You must create a folder before you can create a note!'})
+		}
+		
 	}
 
 	nameHandler = (e) => {
@@ -26,28 +38,26 @@ class AddNote extends React.Component {
 	
 	onSubmitHandler = (e, folders, callback) => {
 		e.preventDefault();
-		
+
 		let targetFolder = folders.find(folder => folder.name === this.state.folder)		
-		let folderId = targetFolder.id
-			
-		let modified = new Date().toTimeString()
-		
+		let folder_id = targetFolder.id
+					
 		let body = {
 			name: this.state.name,
-			folderId: folderId,
+			folder_id: folder_id,
 			content: this.state.body,
-			modified: modified
-		}
+ 		}
 		
 		const options = {
 			method: 'POST',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'Authorization': `Bearer ${config.API_KEY}`
 			},
 			body: JSON.stringify(body)
 		}
 		
-		const URL = `http://localhost:9090/notes`	
+		const URL = `${config.API_ENDPOINT}api/notes`	
 		
 		fetch(URL, options)
 			.then(response => {
@@ -59,6 +69,7 @@ class AddNote extends React.Component {
 		})
 			.then(responseJson => {
 				body.id = responseJson.id
+				body.modified = responseJson.modified
 			
 				callback(body)
 			
@@ -83,6 +94,8 @@ class AddNote extends React.Component {
 		return (
 			<Context.Consumer>
 			{ (context)=> {
+
+
 					if (this.state.errorMsg){
 						return <h1>{this.state.errorMsg}</h1>
 					} 

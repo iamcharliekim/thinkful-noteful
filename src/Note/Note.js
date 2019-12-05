@@ -11,7 +11,7 @@ const note = (props) => {
 				let targetNote;
 
 				if (props.match.params.noteID){
-					targetNote = value.notes.find(note => note.id === props.match.params.noteID)				
+					targetNote = value.notes.find(note => +note.id === +props.match.params.noteID)				
 				}
 				
 				return (

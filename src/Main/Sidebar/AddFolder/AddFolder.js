@@ -1,6 +1,7 @@
 import React from 'react'
 import './AddFolder.css'
 import Context from '../../../Context'
+import config from '../../../config'
 
 class AddFolder extends React.Component {
 	state = {
@@ -9,21 +10,21 @@ class AddFolder extends React.Component {
 	}
 
 	newFolderChange = (e) => {
-		console.log(e.target.value)
 		this.setState({folderName: e.target.value})
 	}
 	
 	onSubmitHandler = (e, callback) => {
 		e.preventDefault();
 		
-		const foldersURL = `http://localhost:9090/folders`
+		const foldersURL = `${config.API_ENDPOINT}api/folders`
 		const body = {
 			name: this.state.folderName
 		}
 		const options = {
 			method: 'POST',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'Authorization': `Bearer ${config.API_KEY}`
 			},
 			body: JSON.stringify(body)
 		}

@@ -13,12 +13,12 @@
 	justify-content: center;
 }
 
-.noteful-sidebar button {
+/* .noteful-sidebar button {
 	width: 100%;
 	font-size: 15px;
 	padding: 10px;
 	cursor: pointer
-}
+} */
 
 .active {
 	color: purple;

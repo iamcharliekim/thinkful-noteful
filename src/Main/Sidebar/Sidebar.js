@@ -1,17 +1,15 @@
 import React from 'react'
 import './Sidebar.css'
-import Sidefolder from './Sidefolder/Sidefolder'
 import { NavLink } from 'react-router-dom'
 import Context from '../../Context'
 import ErrorBoundary from '../../ErrorBoundary'
+import Sidefolder from './Sidefolder/Sidefolder'
 
 const sidebar = (props) => {
 
 	return (
 		<Context.Consumer>
 			{ (value)=> {
-				
-				console.log(value)
 				let foldersArr = value.folders	
 				let notesArr = value.notes
 				let noteID
@@ -20,25 +18,24 @@ const sidebar = (props) => {
 					noteID = props.location.pathname.substring(6)
 					
 					let targetNote = notesArr.find(note => {
-						return note.id === noteID
+						return +note.id === +noteID
 					})	
 											
-					let targetFolderID = targetNote.folderId	
+					let targetfolder_id = targetNote.folder_id	
 					
-					foldersArr = foldersArr.filter(folder => folder.id === targetFolderID)
+					foldersArr = foldersArr.filter(folder => folder.id === targetfolder_id)
 				}
 
 				const folders = foldersArr.map(folder => {
-					console.log(folder)
-					
+
 					return (
 						
-							<ErrorBoundary>
-								<li id={folder.id} className="noteful-sidefolder" key = {folder.id}>
+							<ErrorBoundary key = {folder.id}>
+								<ul id={folder.id} className="noteful-sidefolder" >
 									<NavLink to={"/folder/" + folder.id} className="sidefolder-navlink">
-										{folder.name}
+										<Sidefolder name={folder.name} id={folder.id}></Sidefolder>
 									</NavLink>
-								</li>
+								</ul>
 							</ErrorBoundary>
 						)
 				})
@@ -47,7 +44,9 @@ const sidebar = (props) => {
 					<ul className="noteful-sidebar">
 						{folders}
 
-						{noteID ? <NavLink to="/" className="noteful-sidefolder btn">Go back</NavLink> : <NavLink to="/addfolder" className="noteful-sidefolder btn"> + Add Folder</NavLink>}
+						{noteID || props.location.pathname.includes('/folder/')  ? <NavLink to="/" className="noteful-sidefolder btn">Go back</NavLink> : null}
+
+						<NavLink to="/addfolder" className="noteful-sidefolder btn"> + Add Folder</NavLink>
 
 					</ul>
 				)	

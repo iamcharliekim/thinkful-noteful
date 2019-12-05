@@ -10,18 +10,22 @@ const mainbar = (props) => {
 		<Context.Consumer>
 			{
 				(value)=> {
-					let folderID, notesArr, notes
-					
-					if (props.match.params.folderID){
-						folderID = props.match.params.folderID
-						notesArr = value.notes.filter(note => note.folderId === folderID)
+					let folder_id, notesArr, notes
+
+					if (props.match.params.folder_id){
+						folder_id = +props.match.params.folder_id
+						notesArr = value.notes.filter(note => note.folder_id === folder_id)
 					} else {
 						notesArr = value.notes
 					}
 					
 					
 					notes = notesArr.map(note => {
-						return <Link to={"/note/" + note.id} key= {note.id} className="noteful-link"><ErrorBoundary><NoteDiv title = {note.name} modified = {note.modified} folderID={note.folderId} id={note.id} /></ErrorBoundary></Link>
+						return <Link to={"/note/" + note.id} key= {note.id} className="noteful-link">
+									<ErrorBoundary>
+										<NoteDiv title = {note.name} modified = {note.modified} folder_id={note.folder_id} id={note.id} />
+									</ErrorBoundary>
+								</Link>
 					})
 	
 					return (

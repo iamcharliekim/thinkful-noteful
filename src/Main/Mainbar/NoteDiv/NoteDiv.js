@@ -3,6 +3,7 @@ import './NoteDiv.css'
 import Context from '../../../Context'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import config from '../../../config'
 
 
 class noteDiv extends React.Component{
@@ -15,19 +16,22 @@ class noteDiv extends React.Component{
 	deleteNoteRequest = (e, noteID, callback) => {
 		e.preventDefault();
 		
-		const deleteURL = `http://localhost:9090/notes/${noteID}`
+
+		const deleteURL = `${config.API_ENDPOINT}api/notes/${noteID}`
 		
 		const options = {
 			method: 'DELETE',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'Authorization': `Bearer ${config.API_KEY}`
+
 			}
 		}
 		
 		fetch(deleteURL, options)
 			.then(response => {
 				if (response.ok){
-					return response.json()
+					return response
 				} else {
 					throw new Error('Something went wrong! Could not delete!')
 				}
@@ -35,7 +39,6 @@ class noteDiv extends React.Component{
 			.then(responseJson => {
 				callback(noteID)
 			
-				this.props.history.replace('/')
 		})
 			.catch(error => {
 				this.setState({errorMsg: error.message})
@@ -46,14 +49,14 @@ class noteDiv extends React.Component{
 	render() {
 		let title = this.props.title
 		let modified = this.props.modified
-		let folderID = this.props.folderID
+		let folder_id = this.props.folder_id
 		
 		if (this.state.errorMsg){
 			return <h1>{this.state.errorMsg}</h1>
 		}
 		
 		return (
-			<div className="noteful-notediv" id = {folderID}>
+			<div className="noteful-notediv" id = {folder_id}>
 				<h1>{title}</h1>
 				<h5>{modified}</h5>
 				<button onClick={(e)=> {
@@ -68,7 +71,7 @@ class noteDiv extends React.Component{
 noteDiv.propTypes = {
 	title: PropTypes.string.isRequired,
 	modified: PropTypes.string.isRequired,
-	folderID: PropTypes.string.isRequired,
+	folder_id: PropTypes.number.isRequired,
 	
 }
 

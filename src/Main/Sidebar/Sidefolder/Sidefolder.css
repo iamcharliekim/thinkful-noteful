@@ -4,7 +4,7 @@
  	width: 100%;
 	font-size: 16px;
 	margin: 5px 0;
-	padding: 15px;
+	padding: 5px;
 	text-decoration: snone;
 	color: #22223B;
 	background-color: #E9EBF8;
@@ -15,8 +15,6 @@
 	width: 100%;
 	padding: 15px;
 	text-decoration: none;
-
-	
 }
 
 .noteful-sidefolder:hover{
@@ -26,7 +24,7 @@
 }
 
 
-.btn {
+/* .btn {
 	color: #840032;
 	background-color: white;
 	border: 1px solid gray;
@@ -36,13 +34,28 @@
 .btn:hover {
 	background-color: white;
 	color: #840032;
-}
+} */
 
 
 .active {
 	color: #840032;
 	text-decoration: underline;
 	font-weight: 500;
+}
+
+
+.sidefolder-li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sidefolder-name {
+	width: 70%
+}
+
+.sidefolder-delete-btn {
+	cursor: pointer
 }
 
 

@@ -17,7 +17,7 @@ const body = () => {
 				<Route path="/"  exact component={Mainbar}/>
 
 				<Switch>
-					<Route path="/folder/:folderID" component={Mainbar}/>			
+					<Route path="/folder/:folder_id" component={Mainbar}/>			
 
 					<Route path="/note/:noteID" component={Note}/>			
 
